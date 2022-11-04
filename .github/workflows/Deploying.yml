@@ -1,0 +1,30 @@
+name: Deploying
+on:
+  push:
+    branches:
+      - main
+jobs:
+  deploy:
+    name: Deploying to Testflight
+    runs-on: macOS-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v1
+      - name: Setup provisioning profile
+        run: ./.github/secrets/decrypt_secrets.sh
+      - name: Archiving project
+        env:
+          PR_NUMBER: $(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
+          NAME: ${{ github.event.repository.name }}
+        run: ./.github/scripts/archive_app.sh
+      - name: Exporting .ipa
+        env:
+          NAME: ${{ github.event.repository.name }}
+        run: ./.github/scripts/export_ipa.sh
+      - name: Publishing app
+        if: success()
+        env:
+          ACC: ${{ secrets.ACC }}
+          PASS: ${{ secrets.PASS }}
+          NAME: ${{ github.event.repository.name }}
+        run: ./.github/scripts/publish_testflight.sh
