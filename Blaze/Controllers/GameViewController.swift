@@ -12,6 +12,7 @@ import GameplayKit
 
 class GameViewController: UIViewController, ControllerDelegate {
     
+    @IBOutlet weak var privacyButton: UIButton!
     @IBOutlet weak var soundButton: UIButton!
     
     @IBOutlet weak var centerXGuideConstraint: NSLayoutConstraint!
@@ -50,6 +51,7 @@ class GameViewController: UIViewController, ControllerDelegate {
     
     func soundButton(isShow: Bool) {
         soundButton.isHidden = !isShow
+        privacyButton.isHidden = !isShow
     }
     
     func showGuide(block: @escaping () -> ()) {

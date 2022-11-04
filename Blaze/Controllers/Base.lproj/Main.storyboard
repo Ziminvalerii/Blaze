@@ -63,6 +63,7 @@
                     <connections>
                         <outlet property="centerXGuideConstraint" destination="Spb-Df-U2x" id="hZl-fE-Qnm"/>
                         <outlet property="guideImageView" destination="ZI6-QD-KI9" id="RAr-Hv-lf5"/>
+                        <outlet property="privacyButton" destination="NiO-rp-VFg" id="HNm-WJ-OBR"/>
                         <outlet property="soundButton" destination="cgE-1p-W6M" id="KWV-7J-1Hp"/>
                     </connections>
                 </viewController>
